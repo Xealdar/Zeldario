@@ -2,6 +2,8 @@
 
 #include <qdebug.h>
 
+#include <QPainter>
+
 Background::Background(const QPixmap &pixmap, QGraphicsItem *parent, qreal newPosX, qreal newPosY): QGraphicsPixmapItem (pixmap,parent)
 {
     originPixmap = pixmap;
@@ -9,6 +11,7 @@ Background::Background(const QPixmap &pixmap, QGraphicsItem *parent, qreal newPo
     posY = newPosY;
 
     this->setPos(this->posX,this->posY);
+    this->setShapeMode(QGraphicsPixmapItem::HeuristicMaskShape);
 
 }
 
@@ -47,4 +50,21 @@ qreal Background::getPosX()
 qreal Background::getPosY()
 {
     return posY;
+}
+
+QRectF Background::boundingRect() const
+{
+    return QRectF(0,0,2000,2000);
+}
+
+void Background::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+
+    painter->drawPixmap(0,0, this->pixmap(), 0, 0,2000, 2000);
+    this->setTransformOriginPoint(boundingRect().center());
+    Q_UNUSED(widget);
+    Q_UNUSED(option);
+
+
+
 }

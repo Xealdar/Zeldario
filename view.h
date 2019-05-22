@@ -16,8 +16,9 @@ signals:
 public:
     View(QGraphicsScene *scene);
 
-    virtual void
-    resizeEvent(QResizeEvent *event);
+    virtual void resizeEvent(QResizeEvent *event);
+
+
 
 private:
     QList<QGraphicsItem*> itemsList;

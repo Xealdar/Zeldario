@@ -7,7 +7,7 @@
 #include <QGraphicsScene>
 
 #include <background.h>
-#include <mario.h>
+#include "marioview2.h"
 
 #include <QVector>
 
@@ -23,11 +23,6 @@ public:
     void keyPressEvent(QKeyEvent *event);
     void keyReleaseEvent(QKeyEvent *event);
 
-    static bool getIsRightPushed();
-    static bool getIsLeftPushed();
-    static bool getIsJumpPushed();
-
-
 private:
 
     void initWorld();
@@ -40,12 +35,11 @@ private:
     Background *ground;
     Background *coin;
     Background *sky;
-    Mario *mario;
+    MarioView2 *mario;
 
     Controller *controller;
 
-
-
+    QTimer *timer;
 
 
 };

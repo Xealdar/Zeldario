@@ -1,18 +1,17 @@
 #ifndef CHARACTVIEW_H
 #define CHARACTVIEW_H
 
-
 #include <QPainter>
 #include <QStyleOptionGraphicsItem>
 #include <QGraphicsPixmapItem>
 
 
-class CharactView : public QGraphicsPixmapItem
+
+class MarioView : public QGraphicsPixmapItem
 {
 public:
-    CharactView(QPixmap newPixmap, int newPosX, int newPosY);
+    MarioView(QPixmap newPixmap, int newPosX, int newPosY);
     virtual QPainterPath shape() const;
-
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
     void nextFrame();
@@ -22,6 +21,10 @@ public:
 
     void swapPixmapDirection(int direction);
 
+    void setCurrentState(QString newState);
+
+    void move();
+
 private:
 
 
@@ -30,6 +33,7 @@ private:
     qreal posY;
 
     int mCurrentFrame;
+    QString mCurrentState;
 
 
 };

@@ -3,7 +3,7 @@
 
 #include <QGraphicsItem>
 
-#include <Charactview.h>
+#include <MarioView.h>
 
 
 
@@ -26,8 +26,6 @@ public:
         JUMPANDWALK,
         FALLANDWALK,
     };
-
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
     // Voir si j'ai besoin de ces trois bools
    /* bool isFootColliding(QGraphicsItem *item);
@@ -87,7 +85,7 @@ private:
     int posY;
 
 
-    CharactView *currentQGraphicsItem;
+    MarioView *currentQGraphicsItem;
 
 
 };

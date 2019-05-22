@@ -20,6 +20,9 @@ public:
     qreal getPosX();
     qreal getPosY();
 
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    QRectF boundingRect() const;
+
 private:
     QPixmap originPixmap;
     QPixmap resizedPixmap;

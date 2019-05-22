@@ -4,17 +4,24 @@
 
 #include <QKeyEvent>
 
-
+#include <QTimer>
 
 #include <QPainter>
 
+#include"marioview2.h"
+#include"mariocontroller.h"
 
 Scene::Scene(QObject *parent) : QGraphicsScene(0,0,8000,720, parent)
 
 
 {
     Scene::initWorld();
-    controller = new Controller(mario);
+
+    //controller = new Controller(mario);
+
+    timer = new QTimer(this);
+    timer->setInterval(150);
+    connect(timer, SIGNAL(timeout()),this, SLOT(update()));
 }
 
 
@@ -32,30 +39,45 @@ void Scene::initWorld()
     //ground->setZValue(2);
     addItem(ground);
 
-    mario = new Mario(0,groundYPosition - 70);
+    //mario = new Mario(0,groundYPosition - 10);
     //mario->getCurrentQGraphicsItem()->setZValue(3);
-    addItem(mario->getCurrentQGraphicsItem());
 
 
+    mario = new MarioView2(QPixmap(":Images/marioWalk.png"));
+    addItem(mario);
 }
 
 
 void Scene::keyPressEvent(QKeyEvent *event)
 {
+    //qDebug("keypressed");
+    mario->getController()->keyPressEvent(event);
+
     switch(event->key())
     {
 
         case Qt::Key_Right:
-            controller->checkInputPushed(Qt::Key_Right);
+            //mario->walk();
+//            mario->setDirection(1);
+//            mario->walk();
+//            timer->start(1000);
+//            controller->moveCharact(Qt::Key_Right);
+
+//            if(timer->remainingTime() > 0)
+//            {
+//                qDebug()<<"time remain : "<<timer->remainingTime();
+//            }
+
+            //controller->checkInputPushed(Qt::Key_Right);
 
         break;
 
         case Qt::Key_Left:
-            controller->checkInputPushed(Qt::Key_Left);
+            //controller->checkInputPushed(Qt::Key_Left);
         break;
 
         case Qt::Key_Space:
-            controller->checkInputPushed(Qt::Key_Space);
+            //controller->checkInputPushed(Qt::Key_Space);
         break;
 
         default:
@@ -69,7 +91,9 @@ void Scene::keyReleaseEvent(QKeyEvent *event)
     if (event->isAutoRepeat())
         return;
 
-    switch(event->key())
+    mario->getController()->keyReleaseEvent(event);
+
+    /*switch(event->key())
     {
         case Qt::Key_Right:
             controller->checkInputReleased(Qt::Key_Right);
@@ -87,32 +111,5 @@ void Scene::keyReleaseEvent(QKeyEvent *event)
         default:
         break;
 
-    }
+    }*/
 }
-
-
-
-
-
-
-
-
-
-/*bool Scene::getIsRightPushed()
-{
-    return isRightPushed;
-}
-
-bool Scene::getIsLeftPushed()
-{
-    return isLeftPushed;
-}
-
-bool Scene::getIsJumpPushed()
-{
-    return isJumpPushed;
-}*/
-
-
-
-

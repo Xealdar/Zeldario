@@ -26,14 +26,15 @@ void Controller::checkInputReleased(int newInput)
 
 void Controller::moveCharact(int inputPushed)
 {
+    mario->move();
 
     switch(inputPushed)
     {
         case Qt::Key_Right:
 
-            mario->setDirection(1);
-            mario->walk();
-            mario->move();
+            //mario->setDirection(1);
+            //mario->walk();
+            //mario->move();
 
 
         break;
@@ -54,6 +55,16 @@ void Controller::moveCharact(int inputPushed)
 
     }
 
+
+}
+
+void Controller::collisionreact(QString newCollisionInfo)
+{
+    if(newCollisionInfo == "notFalling")
+    {
+        if(mario->isFalling())
+            mario->stand();
+    }
 
 }
 

@@ -16,12 +16,7 @@ Mario::Mario(int newPosX, int newPosY)
     mShootPixmap = QPixmap("Images/marioStop.png");
     mCurrentPixmap = mWalkPixmap;
 
-    /*
-    currentQGraphicsItem = new QGraphicsPixmapItem(mCurrentPixmap);
-    currentQGraphicsItem->setPos(this->posX,this->posY);
-    */
-
-    currentQGraphicsItem = new CharactView(mCurrentPixmap,this->posX,this->posY);
+    currentQGraphicsItem = new MarioView(mCurrentPixmap,this->posX,this->posY);
 
     stand();
 
@@ -32,20 +27,20 @@ Mario::~Mario()
 
 }
 
-
-
 void Mario::stand()
 {
     mCurrentFrame = 0;
     mCurrentPixmap = mStandingPixmap;
     mCurrentState = STANDING;
     currentQGraphicsItem->setPixmap(mCurrentPixmap);
+    currentQGraphicsItem->setCurrentState("STANDING");
 
 }
 
 void Mario::jump()
 {
     mCurrentState = JUMPING;
+
 
 }
 
@@ -54,7 +49,7 @@ void Mario::jump()
 void Mario::walk()
 {
     mCurrentFrame = 0;
-    if(mCurrentState==WALKING )
+    if(mCurrentState == WALKING )
     {
         return;
     }
@@ -62,6 +57,8 @@ void Mario::walk()
     mCurrentPixmap = mWalkPixmap;
     currentQGraphicsItem->setPixmap(mCurrentPixmap);
     mCurrentState = WALKING;
+    currentQGraphicsItem->setCurrentState("WALKING");
+
 
 }
 
@@ -96,7 +93,7 @@ int Mario::getStandingDirection() const
 }
 
 
-bool Mario::isColliding(QGraphicsItem *item)
+bool Mario::isColliding(QGraphicsItem *item) //Check si je garde
 {
     return this->currentQGraphicsItem->collidesWithItem(item);
 }
@@ -106,11 +103,11 @@ void Mario::move()
     if(mCurrentState == WALKING)
     {
 
-        currentQGraphicsItem->swapPixmapDirection(mDirection);
+        //currentQGraphicsItem->swapPixmapDirection(mDirection);
         dx = mDirection * mVelocity;
         dy = 0;
         currentQGraphicsItem->moveBy(dx,dy);
-        currentQGraphicsItem->nextFrame();
+        //currentQGraphicsItem->nextFrame();
     }
 
     else if(mCurrentState == JUMPING)
@@ -152,15 +149,18 @@ QGraphicsPixmapItem* Mario::getCurrentQGraphicsItem()
     return currentQGraphicsItem;
 }
 
+
 void Mario::setDirection(int newDirection)
 {
     mDirection = newDirection;
 }
 
+
 int Mario::getCurrentFrame()
 {
     return mCurrentFrame;
 }
+
 
 Mario::State Mario::getCurrentState()
 {

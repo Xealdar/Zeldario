@@ -25,18 +25,21 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-    Charactview.cpp \
+    MarioView.cpp \
     background.cpp \
     bonus.cpp \
     brickplatform.cpp \
     coin.cpp \
     coincounter.cpp \
+    collision.cpp \
     controller.cpp \
     link.cpp \
     main.cpp \
     mainwindow.cpp \
     mario.cpp \
     mario_monster.cpp \
+    mariocontroller.cpp \
+    marioview2.cpp \
     mushroom.cpp \
     platform.cpp \
     scene.cpp \
@@ -44,17 +47,20 @@ SOURCES += \
     zelda_monster.cpp
 
 HEADERS += \
-    Charactview.h \
+    MarioView.h \
     background.h \
     bonus.h \
     brickplatform.h \
     coin.h \
     coincounter.h \
+    collision.h \
     controller.h \
     link.h \
     mainwindow.h \
     mario.h \
     mario_monster.h \
+    mariocontroller.h \
+    marioview2.h \
     mushroom.h \
     platform.h \
     scene.h \
