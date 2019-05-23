@@ -13,9 +13,6 @@ public:
     void keyPressEvent(QKeyEvent *event);
     void keyReleaseEvent(QKeyEvent *event);
 
-    inline int getOriginX(){return originX;}
-    inline int getOriginY(){return originY;}
-
     inline double getDx(){return dx;}
     inline double getDy(){return dy;}
 
@@ -38,12 +35,9 @@ private:
 
     State state;
 
-    int originX;
-    int originY;
-
     double dx = 0;
     double dy = 0;
-    double velocity = 0.25;
+    double velocity = 0.75;
 
     int pixmapIndex = 0;
 

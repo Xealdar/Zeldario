@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/sounds">
+        <file>billie_jean.mp3</file>
+    </qresource>
+</RCC>

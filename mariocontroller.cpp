@@ -5,9 +5,6 @@
 MarioController::MarioController(MarioView2 *view)
 {
     this->view = view;
-    originX = 0;
-    originY = 0;
-
     qDebug() << view;
 }
 
@@ -17,12 +14,17 @@ void MarioController:: move(){
         case WALKING_LEFT:
             dx = -1 * velocity;
             dy = 0;
-
+            view->playMJ();
         break;
 
         case WALKING_RIGHT:
             dx = velocity;
             dy = 0;
+            view->pauseMJ();
+        break;
+
+        case JUMPING:
+            dy = -velocity*3;
         break;
     }
 
@@ -32,6 +34,7 @@ void MarioController:: stand(){
     pixmapIndex = 0;
     dx = 0;
     dy = 0;
+    view->pauseMJ();
 }
 
 
@@ -52,6 +55,10 @@ void MarioController::keyPressEvent(QKeyEvent *event)
         break;
         case Qt::Key_Left:
             state = WALKING_LEFT;
+            move();
+        break;
+        case Qt::Key_Space:
+            state = JUMPING;
             move();
         break;
     }

@@ -1,12 +1,11 @@
 #include <scene.h>
 
 #include <QDebug>
-
 #include <QKeyEvent>
-
 #include <QTimer>
-
 #include <QPainter>
+#include <QMediaPlayer>
+
 
 #include"marioview2.h"
 #include"mariocontroller.h"
@@ -18,10 +17,6 @@ Scene::Scene(QObject *parent) : QGraphicsScene(0,0,8000,720, parent)
     Scene::initWorld();
 
     //controller = new Controller(mario);
-
-    timer = new QTimer(this);
-    timer->setInterval(150);
-    connect(timer, SIGNAL(timeout()),this, SLOT(update()));
 }
 
 
@@ -43,7 +38,10 @@ void Scene::initWorld()
     //mario->getCurrentQGraphicsItem()->setZValue(3);
 
 
-    mario = new MarioView2(QPixmap(":Images/marioWalk.png"));
+    mario = new MarioView2(QPixmap(":Images/marioWalk.png"), 150, groundYPosition - 65);
+    MarioView2 *mario2 = new MarioView2(QPixmap(":Images/marioWalk.png"), 0, groundYPosition + 650);
+
+    //addItem(mario2);
     addItem(mario);
 }
 

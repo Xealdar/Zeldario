@@ -122,7 +122,6 @@ void Mario::move()
         dx = 0;
         dy = mVelocity;
         currentQGraphicsItem->moveBy(dx,dy);
-
     }
 
     else if(mCurrentState == JUMPANDWALK)

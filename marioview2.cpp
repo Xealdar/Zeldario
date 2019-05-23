@@ -6,15 +6,15 @@
 
 #include <QGraphicsScene>
 
-static int count = 0;
+int count = 0;
 
-MarioView2::MarioView2(QPixmap pixmap)
+MarioView2::MarioView2(QPixmap pixmap, int originX, int originY)
 {
     controller = new MarioController(this);
-    this->setPixmap(pixmap);
-    this->setPos(0,0);
-    //this->setPos(controller->getOriginX(),controller->getOriginY());
-    this->setShapeMode(QGraphicsPixmapItem::HeuristicMaskShape);
+    setPixmap(pixmap);
+    setPos(originX,originY);
+    setShapeMode(QGraphicsPixmapItem::HeuristicMaskShape);
+    initMediaPlayer();
 
     qDebug() << "mario view init done" << pos().x() << pos().y();
 }
@@ -37,19 +37,41 @@ void MarioView2::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
     painter->drawPixmap(0,0, pixmap(), pixmapIndex, 0,60, 73);
     this->setTransformOriginPoint(boundingRect().center());
 
+
+    QList<QGraphicsItem*> itemsCollidingList = scene()->collidingItems(this);
+    if(itemsCollidingList.size() > 0){
+        qDebug() << itemsCollidingList;
+    }
+
     double dx = controller->getDx();
     double dy = controller->getDy();
 
     if(dx != 0 || dy != 0){
         moveBy(dx, dy);
-        if(count % 20 == 0)
+        if(count % 8 == 0)
             updatePixmapIndex();
-    }else
+    } else
         count = 0;
 
     Q_UNUSED(option);
     Q_UNUSED(widget);
+}
 
+void MarioView2::initMediaPlayer(){
+    mediaPlayer = new QMediaPlayer();
+    mediaPlayer->setMedia(QUrl("qrc:/sounds/billie_jean.mp3"));
+}
+
+void MarioView2::playMJ(){
+    if(mediaPlayer != nullptr && mediaPlayer->state() != QMediaPlayer::PlayingState){
+        mediaPlayer->play();
+    }
+}
+
+void MarioView2::pauseMJ(){
+    if(mediaPlayer != nullptr && mediaPlayer->state() == QMediaPlayer::PlayingState){
+        mediaPlayer->pause();
+    }
 }
 
 void MarioView2::updatePixmapIndex()

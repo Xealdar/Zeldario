@@ -4,7 +4,8 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui \
+         multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -78,4 +79,5 @@ RESOURCES += \
     Images/sky.png \
     Images/ground2.png \
     Images/marioWalk.png \
-    Images/marioStop.png
+    Images/marioStop.png \
+    res.qrc
