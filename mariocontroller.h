@@ -30,6 +30,11 @@ public:
         FALLANDWALK,
     };
 
+    enum{
+        Type =1,
+        UserType = 65536
+    };
+
 private:
     MarioView2 *view;
 

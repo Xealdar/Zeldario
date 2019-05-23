@@ -63,6 +63,7 @@ HEADERS += \
     mariocontroller.h \
     marioview2.h \
     mushroom.h \
+    objecttype.h \
     platform.h \
     scene.h \
     view.h \
