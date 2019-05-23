@@ -20,7 +20,7 @@ MonsterView::MonsterView(QPixmap newPixmap)
     //setPixmapSize(460,586); //-3500
 
     controller->createRandomSpawn();
-    setPos(controller->PosX(),controller->PosY());
+    setPos(controller->getOriginPosX(),controller->getOriginPosY());
 
 }
 
@@ -57,7 +57,7 @@ void MonsterView::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 
 
     if(dx != 0 || dy != 0){
-        //moveBy(dx, dy);
+        moveBy(dx, dy);
         if(count % 50 == 0)
         {
 

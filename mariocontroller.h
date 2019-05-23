@@ -37,7 +37,7 @@ private:
 
     double dx = 0;
     double dy = 0;
-    double velocity = 0.15;
+    double velocity = 0.3;
 
     int pixmapIndex = 0;
 
@@ -45,6 +45,8 @@ private:
     void stand();
 
     void swapPixmapDirection(int direction);
+
+
 };
 
 #endif // MARIOCONTROLLER_H

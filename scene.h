@@ -3,6 +3,8 @@
 
 #include <QScrollBar>
 #include <QObject>
+
+
 #include <QTimerEvent>
 #include <QGraphicsScene>
 
@@ -19,17 +21,24 @@
 class Scene : public QGraphicsScene
 {
 
+    Q_OBJECT
+
 public:
     Scene(QObject *parent = 0);
 
     void keyPressEvent(QKeyEvent *event);
     void keyReleaseEvent(QKeyEvent *event);
 
+
+
+public slots:
+    void monsterSpawn();
+
 private:
 
     void initWorld();
 
-    //QVector<Background*> ground{10};
+
 
     int groundYPosition = 650;
 
@@ -38,14 +47,13 @@ private:
     Background *coin;
     Background *sky;
     MarioView2 *mario;
-    MonsterView *monster;
 
+    QVector<MonsterView*> monster;
     Controller *controller;
 
     QTimer *timer;
 
-private slots:
-    void monsterSpawwn();
+
 };
 
 

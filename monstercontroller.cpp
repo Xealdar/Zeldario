@@ -2,6 +2,8 @@
 
 #include <qrandom.h>
 
+#include "monsterview.h"
+
 #include <QDebug>
 
 MonsterController::MonsterController(MonsterView *view)
@@ -40,9 +42,9 @@ void MonsterController:: move(){
 
 void MonsterController::createRandomSpawn()
 {
-    posX = QRandomGenerator::global()->bounded(750);
-    posY = QRandomGenerator::global()->bounded(10);
-    qDebug()<<"random: "<<posY;
+    originPosX = QRandomGenerator::global()->bounded(750);
+    originPosY = QRandomGenerator::global()->bounded(10);
+    qDebug()<<"random: "<<originPosY;
 
     //width = 750
     //height = 850
@@ -50,6 +52,19 @@ void MonsterController::createRandomSpawn()
 
 void MonsterController::IA()
 {
+    directionX = marioPosX - view->pos().x();
+    directionY = marioPosY - view->pos().y();
 
+    dx = directionX * velocity;
+    dy = directionY * velocity;
+
+
+}
+
+void MonsterController::setMarioPos(double newMarioPosX, double newMarioPosY)
+{
+    marioPosX = newMarioPosX;
+    marioPosY = newMarioPosY;
+    IA();
 }
 

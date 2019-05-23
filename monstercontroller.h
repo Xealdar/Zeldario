@@ -1,6 +1,8 @@
 #ifndef MONSTERCONTROLLER_H
 #define MONSTERCONTROLLER_H
 
+
+
 class MonsterView;
 
 class MonsterController
@@ -11,8 +13,8 @@ public:
     inline double getDx(){return dx;}
     inline double getDy(){return dy;}
 
-    inline int PosX(){return posX;}
-    inline int PosY(){return posY;}
+    inline double getOriginPosX(){return originPosX;}
+    inline double getOriginPosY(){return originPosY;}
 
     inline int getPixmapIndex(){return pixmapIndex;}
 
@@ -27,6 +29,8 @@ public:
 
     void IA();
 
+    void setMarioPos(double newMarioPosX, double newMarioPosY);
+
 private:
     MonsterView *view;
 
@@ -34,17 +38,19 @@ private:
 
     double dx = 0;
     double dy = 0;
-    double velocity = 0.15;
+    double velocity = 0.0005;
 
     int pixmapIndex = 0;
 
     void move();
 
 
-    int direction;
-    int posX;
-    int posY;
-
+    double directionX;
+    double directionY;
+    double originPosX;
+    double originPosY;
+    double marioPosX;
+    double marioPosY;
 };
 
 #endif // MONSTERCONTROLLER_H

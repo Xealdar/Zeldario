@@ -14,11 +14,14 @@
 
 Scene::Scene(QObject *parent) : QGraphicsScene(0,0,8000,720, parent)
 {
+
     Scene::initWorld();
     timer = new QTimer(this);
-    timer->setInterval(1000);
-    connect(timer, SIGNAL(timeout()), this, SLOT(monsterSpawwn()));
+    timer->setInterval(5000);
+    //connect(timer, SIGNAL(timeout()), this, SLOT(monsterSpawwn()));
+    QObject::connect(timer, SIGNAL(timeout()), this, SLOT(monsterSpawn()));
     timer->start();
+
 
 }
 
@@ -42,9 +45,6 @@ void Scene::initWorld()
 
 
     mario = new MarioView2(QPixmap(":Images/marioWalk.png"), 150, groundYPosition - 65);
-    MarioView2 *mario2 = new MarioView2(QPixmap(":Images/marioWalk.png"), 0, groundYPosition + 650);
-
-    //addItem(mario2);
     addItem(mario);
 
 
@@ -54,40 +54,10 @@ void Scene::initWorld()
 
 void Scene::keyPressEvent(QKeyEvent *event)
 {
-    //qDebug("keypressed");
+
     mario->getController()->keyPressEvent(event);
 
-    switch(event->key())
-    {
 
-        case Qt::Key_Right:
-            //mario->walk();
-//            mario->setDirection(1);
-//            mario->walk();
-//            timer->start(1000);
-//            controller->moveCharact(Qt::Key_Right);
-
-//            if(timer->remainingTime() > 0)
-//            {
-//                qDebug()<<"time remain : "<<timer->remainingTime();
-//            }
-
-            //controller->checkInputPushed(Qt::Key_Right);
-
-        break;
-
-        case Qt::Key_Left:
-            //controller->checkInputPushed(Qt::Key_Left);
-        break;
-
-        case Qt::Key_Space:
-            //controller->checkInputPushed(Qt::Key_Space);
-        break;
-
-        default:
-        break;
-
-    }
 }
 
 void Scene::keyReleaseEvent(QKeyEvent *event)
@@ -98,29 +68,17 @@ void Scene::keyReleaseEvent(QKeyEvent *event)
     mario->getController()->keyReleaseEvent(event);
 
 
-    /*switch(event->key())
-    {
-        case Qt::Key_Right:
-            controller->checkInputReleased(Qt::Key_Right);
-        break;
 
-        case Qt::Key_Left:
-            controller->checkInputReleased(Qt::Key_Left);
-        break;
-
-        case Qt::Key_Space:
-            controller->checkInputReleased(Qt::Key_Space);
-        break;
-        //Gérer le cas où on appuie sur deux touches en même temps
-
-        default:
-        break;
-
-    }*/
 }
 
-void Scene::monsterSpawwn()
+void Scene::monsterSpawn()
 {
-    monster = new MonsterView(QPixmap(":Images/MonsterIdle"));
-    addItem(monster);
+
+    monster.append(new MonsterView(QPixmap(":Images/MonsterIdle.png")));
+    monster.at(monster.length()-1)->getController()->setMarioPos(mario->pos().x(),mario->pos().y());
+    qDebug()<<"x : "<<mario->pos().x();
+    addItem(monster[monster.length()-1]);
+
 }
+
+

@@ -17,6 +17,7 @@ MarioView2::MarioView2(QPixmap pixmap, int originX, int originY)
     initMediaPlayer();
 
     qDebug() << "mario view init done" << pos().x() << pos().y();
+    qDebug()<<"test"<<scenePos();
 }
 
 QRectF MarioView2::boundingRect() const
