@@ -48,7 +48,7 @@ void MarioView2::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 
     if(dx != 0 || dy != 0){
         moveBy(dx, dy);
-        if(count % 8 == 0)
+        if(count % 17 == 0)
             updatePixmapIndex();
     } else
         count = 0;

@@ -8,10 +8,12 @@
 
 #include <background.h>
 #include "marioview2.h"
+#include "monsterview.h"
 
 #include <QVector>
 
 #include <controller.h>
+
 
 
 class Scene : public QGraphicsScene
@@ -36,12 +38,14 @@ private:
     Background *coin;
     Background *sky;
     MarioView2 *mario;
+    MonsterView *monster;
 
     Controller *controller;
 
     QTimer *timer;
 
-
+private slots:
+    void monsterSpawwn();
 };
 
 

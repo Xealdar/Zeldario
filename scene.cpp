@@ -10,13 +10,16 @@
 #include"marioview2.h"
 #include"mariocontroller.h"
 
+#include "monstercontroller.h"
+
 Scene::Scene(QObject *parent) : QGraphicsScene(0,0,8000,720, parent)
-
-
 {
     Scene::initWorld();
+    timer = new QTimer(this);
+    timer->setInterval(1000);
+    connect(timer, SIGNAL(timeout()), this, SLOT(monsterSpawwn()));
+    timer->start();
 
-    //controller = new Controller(mario);
 }
 
 
@@ -43,6 +46,9 @@ void Scene::initWorld()
 
     //addItem(mario2);
     addItem(mario);
+
+
+
 }
 
 
@@ -91,6 +97,7 @@ void Scene::keyReleaseEvent(QKeyEvent *event)
 
     mario->getController()->keyReleaseEvent(event);
 
+
     /*switch(event->key())
     {
         case Qt::Key_Right:
@@ -110,4 +117,10 @@ void Scene::keyReleaseEvent(QKeyEvent *event)
         break;
 
     }*/
+}
+
+void Scene::monsterSpawwn()
+{
+    monster = new MonsterView(QPixmap(":Images/MonsterIdle"));
+    addItem(monster);
 }
