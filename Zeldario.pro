@@ -45,7 +45,8 @@ SOURCES += \
     platform.cpp \
     scene.cpp \
     view.cpp \
-    zelda_monster.cpp
+    zelda_monster.cpp \
+    welcome.cpp
 
 HEADERS += \
     MarioView.h \
@@ -66,7 +67,8 @@ HEADERS += \
     platform.h \
     scene.h \
     view.h \
-    zelda_monster.h
+    zelda_monster.h \
+    welcome.h
 
 
 # Default rules for deployment.
