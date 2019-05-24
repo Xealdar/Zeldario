@@ -27,7 +27,9 @@ QRectF MarioView2::boundingRect() const
 
 QPainterPath MarioView2::shape() const
 {
-    return QPainterPath();
+    QPainterPath path;
+    path.addRect(0,0,100,100);
+    return path;
 }
 
 void MarioView2::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -39,17 +41,17 @@ void MarioView2::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
     this->setTransformOriginPoint(boundingRect().center());
 
 
-    QList<QGraphicsItem*> itemsCollidingList = scene()->collidingItems(this);
+    /*QList<QGraphicsItem*> itemsCollidingList = scene()->collidingItems(this);
     if(itemsCollidingList.size() > 0){
         qDebug() << itemsCollidingList;
-    }
+    }*/
 
     double dx = controller->getDx();
     double dy = controller->getDy();
 
     if(dx != 0 || dy != 0){
         moveBy(dx, dy);
-        if(count % 17 == 0)
+        if(count % 30 == 0)
             updatePixmapIndex();
     } else
         count = 0;

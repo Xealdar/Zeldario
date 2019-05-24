@@ -8,7 +8,8 @@
 #include <QTimerEvent>
 #include <QGraphicsScene>
 
-#include <background.h>
+#include <ground.h>
+#include "background.h"
 #include "marioview2.h"
 #include "monsterview.h"
 
@@ -29,6 +30,8 @@ public:
     void keyPressEvent(QKeyEvent *event);
     void keyReleaseEvent(QKeyEvent *event);
 
+    inline Ground *getGround(){return ground;}
+
 
 
 public slots:
@@ -42,9 +45,8 @@ private:
 
     int groundYPosition = 650;
 
-    Background *scene;
-    Background *ground;
-    Background *coin;
+
+    Ground *ground;
     Background *sky;
     MarioView2 *mario;
 

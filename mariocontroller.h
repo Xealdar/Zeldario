@@ -37,7 +37,7 @@ private:
 
     double dx = 0;
     double dy = 0;
-    double velocity = 0.3;
+    double velocity = 0.2;
 
     int pixmapIndex = 0;
 

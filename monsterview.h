@@ -4,6 +4,8 @@
 #include<QGraphicsPixmapItem>
 #include <QPixmap>
 
+
+
 class MonsterController;
 
 class MonsterView : public QGraphicsPixmapItem
@@ -41,6 +43,17 @@ private:
 
     void setPixmapSize(int w, int h);
 
+    QVector<QGraphicsItem*> itemsCollidingVector;
+
+    void move();
+
+    QList<double> dxTab;
+
+    int dxIndex = 0;
+    double dy;
+    double bx = 0;
+
+    double parabole(double x);
 };
 
 #endif // MONSTERVIEW_H

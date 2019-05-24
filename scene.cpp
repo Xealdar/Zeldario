@@ -32,11 +32,11 @@ void Scene::initWorld()
 
 
     sky = new Background(QPixmap(":Images/sky.png"),0,0,0);
-    //sky->setZValue(1);
+    //sky->setZValue(0);
 
     addItem(sky);
 
-    ground = new Background(QPixmap(":Images/ground2.png"),0,0,groundYPosition);
+    ground = new Ground(QPixmap(":Images/ground2.png"),0,0,groundYPosition);
     //ground->setZValue(2);
     addItem(ground);
 
@@ -73,12 +73,11 @@ void Scene::keyReleaseEvent(QKeyEvent *event)
 
 void Scene::monsterSpawn()
 {
-
     monster.append(new MonsterView(QPixmap(":Images/MonsterIdle.png")));
     monster.at(monster.length()-1)->getController()->setMarioPos(mario->pos().x(),mario->pos().y());
-    qDebug()<<"x : "<<mario->pos().x();
-    addItem(monster[monster.length()-1]);
 
+
+    addItem(monster[monster.length()-1]);
 }
 
 

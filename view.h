@@ -2,7 +2,7 @@
 #define VIEW_H
 
 #include <QGraphicsView>
-#include <background.h>
+#include <ground.h>
 
 
 #include <QList>

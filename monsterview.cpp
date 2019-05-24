@@ -6,6 +6,7 @@
 
 #include <QGraphicsScene>
 
+#include <QtMath>
 
 
 MonsterView::MonsterView(QPixmap newPixmap)
@@ -22,6 +23,9 @@ MonsterView::MonsterView(QPixmap newPixmap)
     controller->createRandomSpawn();
     setPos(controller->getOriginPosX(),controller->getOriginPosY());
 
+    dxTab = controller->setRandomDxTab(dxTab);
+    //qDebug()<<"tab : "<<dxTab;
+
 }
 
 QRectF MonsterView::boundingRect() const
@@ -31,7 +35,9 @@ QRectF MonsterView::boundingRect() const
 
 QPainterPath MonsterView::shape() const
 {
-    return QPainterPath();
+    QPainterPath path;
+    path.addRect(0,0,100,100);
+    return path;
 }
 
 void MonsterView::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -45,28 +51,18 @@ void MonsterView::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 
     this->setTransformOriginPoint(boundingRect().center());
 
-/*
-    QList<QGraphicsItem*> itemsCollidingList = scene()->collidingItems(this);
-    if(itemsCollidingList.size() > 0){
-        qDebug() << itemsCollidingList;
+
+    itemsCollidingVector = scene()->collidingItems(this).toVector();
+    if(itemsCollidingVector.length() > 0){
+        //qDebug()<<"itemsColliding : " << itemsCollidingVector;
+        controller->collisionReaction(itemsCollidingVector);
     }
-*/
-    double dx = controller->getDx();
-    double dy = controller->getDy();
+
+
+    move();
 
 
 
-    if(dx != 0 || dy != 0){
-        moveBy(dx, dy);
-        if(count % 50 == 0)
-        {
-
-            updatePixmapIndex();
-        }
-
-
-    } else
-        count = 0;
 
     Q_UNUSED(option);
     Q_UNUSED(widget);
@@ -101,3 +97,78 @@ void MonsterView::setPixmapSize(int w, int h)
     this->setPixmap(resizedPixmap);
 }
 
+void MonsterView::move()
+{
+
+    double originDx = controller->getOriginDx();
+    double originDy = controller->getOriginDy();
+    MonsterController::State currentState = controller->getState();
+
+    if(originDx != 0 || originDy != 0)
+    {
+
+        if(count % 50 == 0)
+        {
+            updatePixmapIndex();
+        }
+
+
+        if(currentState == MonsterController::IDLE)
+        {
+            moveBy(originDx, originDy);
+        }
+
+        else if(currentState == MonsterController::BOUNCING)
+        {
+            //qDebug()<<"dxTab : "<<"dxTab[0]"<<"dxTab length :"<<dxTab.length();
+            //dy = (-qPow(dxTab[dxIndex],2) + 6*dxTab[dxIndex] -50) * controller->getBouncingVelocity();
+            double y = parabole(bx);
+
+//            dy = y;
+//            qDebug()<<"y : "<<y<<"posY : "<<pos().y();
+//            qDebug()<<"dx : "<<dxTab[dxIndex]<<"dy : "<<dy;
+            //qDebug() <<
+            //moveBy(0.5, -y);
+
+            //double newPos = pos().y() - y;
+            //dy = newPos - pos().y();
+
+
+            double newPos = 578 - y;
+            dy = newPos - pos().y();
+
+            //double newPos = y - pos().y();
+            //dy =pos().y()-newPos;
+
+
+            qDebug() << "calc y" << y << "newPos:" << newPos;
+            qDebug() << "posY" << pos().y() << "dy:" << dy << "\n";
+            //dy *= controller->getBouncingVelocity();
+            if(originDx < 0)
+                moveBy(-0.5,dy);
+            else
+                moveBy(0.5,dy);
+
+            bx +=0.5;
+
+            if(bx >= 160)
+                bx = 0;
+
+            //if(dxIndex >=79)
+            //{
+                //dxIndex = 0;
+                //qDebug()<<"dxIndex : "<<dxIndex;
+//            }
+//            dxIndex++;
+        }
+
+    }
+    else
+        count = 0;
+
+}
+
+double MonsterView::parabole(double x){
+    //return -0.0875*qPow(x,2) + 7*x + 1.4;
+    return -0.05*qPow(x,2) + 8.3*x + 1.4;
+}

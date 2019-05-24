@@ -34,6 +34,7 @@ SOURCES += \
     coincounter.cpp \
     collision.cpp \
     controller.cpp \
+    ground.cpp \
     link.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -57,6 +58,7 @@ HEADERS += \
     coincounter.h \
     collision.h \
     controller.h \
+    ground.h \
     link.h \
     mainwindow.h \
     mario.h \

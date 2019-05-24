@@ -28,7 +28,7 @@ void View::resizeEvent(QResizeEvent *event)
 
         qDebug() << "resize" << itemsList;
 
-        dynamic_cast<Background*>(itemsList[itemsList.length()-2])->setPixmapSize(this->size().width(),100);
+        dynamic_cast<Ground*>(itemsList[itemsList.length()-2])->setPixmapSize(this->size().width(),100);
         dynamic_cast<Background*>(itemsList[itemsList.length()-1])->setPixmapSize(this->size().width(),this->size().height());
 
 

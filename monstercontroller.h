@@ -2,6 +2,7 @@
 #define MONSTERCONTROLLER_H
 
 
+#include <QGraphicsItem>
 
 class MonsterView;
 
@@ -10,19 +11,21 @@ class MonsterController
 public:
     MonsterController(MonsterView *view);
 
-    inline double getDx(){return dx;}
-    inline double getDy(){return dy;}
+    inline double getOriginDx(){return originDx;}
+    inline double getOriginDy(){return originDy;}
 
     inline double getOriginPosX(){return originPosX;}
     inline double getOriginPosY(){return originPosY;}
 
     inline int getPixmapIndex(){return pixmapIndex;}
 
+
+
     enum State
     {
-        WALKING_RIGHT,
-        WALKING_LEFT,
+        IDLE,
         DYING,
+        BOUNCING,
     };
 
     void createRandomSpawn();
@@ -31,18 +34,28 @@ public:
 
     void setMarioPos(double newMarioPosX, double newMarioPosY);
 
+    void collisionReaction(QVector<QGraphicsItem*> itemsCollidingVector);
+
+    inline State getState(){return state;}
+
+    QList<double> setRandomDxTab(QList<double> dxTab);
+
+    inline double getBouncingVelocity(){return bouncingVelocity;}
+
+
 private:
     MonsterView *view;
 
     State state;
 
-    double dx = 0;
-    double dy = 0;
+    double originDx = 0;
+    double originDy = 0;
     double velocity = 0.0005;
+    double bouncingVelocity = 0.0005;
 
     int pixmapIndex = 0;
 
-    void move();
+
 
 
     double directionX;

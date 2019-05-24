@@ -6,48 +6,24 @@
 
 #include <QDebug>
 
+#include <scene.h>
+
+
+
 MonsterController::MonsterController(MonsterView *view)
 {
     this->view = view;
-    state = WALKING_RIGHT; //Pour les tests
-    //tests:
-    move();
-
-
+    state = IDLE;
 }
 
 
-void MonsterController:: move(){
 
-    switch(state){
-        case WALKING_LEFT:
-            dx = -1 * velocity;
-            dy = 0;
-
-        break;
-
-        case WALKING_RIGHT:
-            dx = velocity;
-            dy = 0;
-
-        break;
-
-        case DYING:
-            dx = 0;
-            dy = 0;
-        break;
-    }
-}
 
 
 void MonsterController::createRandomSpawn()
 {
     originPosX = QRandomGenerator::global()->bounded(750);
     originPosY = QRandomGenerator::global()->bounded(10);
-    qDebug()<<"random: "<<originPosY;
-
-    //width = 750
-    //height = 850
 }
 
 void MonsterController::IA()
@@ -55,10 +31,8 @@ void MonsterController::IA()
     directionX = marioPosX - view->pos().x();
     directionY = marioPosY - view->pos().y();
 
-    dx = directionX * velocity;
-    dy = directionY * velocity;
-
-
+    originDx = directionX * velocity;
+    originDy = directionY * velocity;
 }
 
 void MonsterController::setMarioPos(double newMarioPosX, double newMarioPosY)
@@ -67,4 +41,26 @@ void MonsterController::setMarioPos(double newMarioPosX, double newMarioPosY)
     marioPosY = newMarioPosY;
     IA();
 }
+
+void MonsterController::collisionReaction(QVector<QGraphicsItem*> itemsCollidingVector)
+{
+    //qDebug()<<"itemVector : "<<itemsCollidingVector<<"item in scene : "<<view->scene()->items()[0];
+
+    if(itemsCollidingVector.contains(dynamic_cast<Scene*>(view->scene())->getGround()))
+    {
+        state = BOUNCING;
+
+    }
+}
+
+QList<double> MonsterController::setRandomDxTab(QList<double> dxTab)
+{
+    for(int i=0;i<1000;i++)
+        //dxTab.append(QRandomGenerator::global()->bounded(100)* bouncingVelocity);
+        dxTab.append(i);
+    return dxTab;
+}
+
+
+
 

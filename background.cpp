@@ -1,7 +1,5 @@
 #include "background.h"
 
-#include <qdebug.h>
-
 #include <QPainter>
 
 Background::Background(const QPixmap &pixmap, QGraphicsItem *parent, qreal newPosX, qreal newPosY): QGraphicsPixmapItem (pixmap,parent)
@@ -10,8 +8,9 @@ Background::Background(const QPixmap &pixmap, QGraphicsItem *parent, qreal newPo
     posX = newPosX;
     posY = newPosY;
 
-    this->setPos(this->posX,this->posY);
-    this->setShapeMode(QGraphicsPixmapItem::HeuristicMaskShape);
+    setPos(this->posX,this->posY);
+
+
 
 }
 
@@ -20,41 +19,12 @@ QPainterPath Background::shape() const
     return QPainterPath();
 }
 
-void Background::resizePixmap(int viewHeight, int viewWidth)
-{
-    resizedPixmap = originPixmap.scaled(viewHeight,viewWidth,Qt::KeepAspectRatio);
-    this->moveBy(((viewWidth - oldViewWidth) * posFactor),((viewHeight-oldViewHeight) * posFactor)); //A régler pour que la position ne change pas quoi qu'il arrive quand on change la size
-    this->setPixmap(resizedPixmap);
-    qDebug()<<"dX"<<((viewWidth - oldViewWidth) * posFactor)<<"dY"<<((viewHeight-oldViewHeight) * posFactor);
-
-    oldViewWidth = viewWidth;
-    oldViewHeight = viewHeight;
-}
-
-QPixmap Background::getResizedPixmap()
-{
-    return resizedPixmap;
-}
 
 void Background::setPixmapSize(int w, int h)
 {
+    QPixmap resizedPixmap;
     resizedPixmap = originPixmap.scaled(w,h);
-    this->setPixmap(resizedPixmap);
-}
-
-qreal Background::getPosX()
-{
-    return posX;
-}
-
-qreal Background::getPosY()
-{
-    return posY;
-}
-
-QRectF Background::boundingRect() const
-{
-    return QRectF(0,0,2000,2000);
+    setPixmap(resizedPixmap);
 }
 
 void Background::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
