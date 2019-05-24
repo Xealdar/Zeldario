@@ -23,7 +23,7 @@ MonsterView::MonsterView(QPixmap newPixmap)
     controller->createRandomSpawn();
     setPos(controller->getOriginPosX(),controller->getOriginPosY());
 
-    dxTab = controller->setRandomDxTab(dxTab);
+
     //qDebug()<<"tab : "<<dxTab;
 
 }
@@ -120,18 +120,10 @@ void MonsterView::move()
 
         else if(currentState == MonsterController::BOUNCING)
         {
-            //qDebug()<<"dxTab : "<<"dxTab[0]"<<"dxTab length :"<<dxTab.length();
-            //dy = (-qPow(dxTab[dxIndex],2) + 6*dxTab[dxIndex] -50) * controller->getBouncingVelocity();
+
             double y = parabole(bx);
 
-//            dy = y;
-//            qDebug()<<"y : "<<y<<"posY : "<<pos().y();
-//            qDebug()<<"dx : "<<dxTab[dxIndex]<<"dy : "<<dy;
-            //qDebug() <<
-            //moveBy(0.5, -y);
 
-            //double newPos = pos().y() - y;
-            //dy = newPos - pos().y();
 
 
             double newPos = 578 - y;
