@@ -1,14 +1,14 @@
-#include "brickplatform.h"
+#include "stairblock.h"
 #include <QPainter>
 
-BrickPlatform::BrickPlatform( int length, QGraphicsItem *parent)
+StairBlock::StairBlock( int length, QGraphicsItem *parent)
     :QGraphicsItem(parent),mCurrentFrame(0), mLength(length)
 {
     setFlag(ItemClipsToShape);
-    mPixmap = QPixmap(":images/brick3.png");
+    mPixmap = QPixmap(":images/stairblock.png");
 }
 
-void BrickPlatform::nextFrame() {
+void StairBlock::nextFrame() {
     mCurrentFrame += 48;
     if (mCurrentFrame >= 768 ) {
         mCurrentFrame = 0;
@@ -16,11 +16,11 @@ void BrickPlatform::nextFrame() {
 }
 
 
-QRectF BrickPlatform::boundingRect() const {
+QRectF StairBlock::boundingRect() const {
     return QRectF(0,0,48*mLength,48);
 }
 
-void BrickPlatform::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
+void StairBlock::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
     Q_UNUSED(widget);
     Q_UNUSED(option);
     for(int i = 0; i < 48*mLength; ++i) {
@@ -29,6 +29,6 @@ void BrickPlatform::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     setTransformOriginPoint(boundingRect().center());
 }
 
-int BrickPlatform::type() const {
+int StairBlock::type() const {
     return Type;
 }

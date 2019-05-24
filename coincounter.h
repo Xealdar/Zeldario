@@ -2,10 +2,15 @@
 #define COINCOUNTER_H
 
 
-class CoinCounter
-{
+#include <QGraphicsTextItem>
+
+class CoinCounter: public QGraphicsTextItem{
 public:
-    CoinCounter();
+    CoinCounter(QGraphicsItem * parent=0);
+    void increase();
+    int getCount();
+private:
+    int coinCount;
 };
 
 #endif // COINCOUNTER_H

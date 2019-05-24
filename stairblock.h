@@ -1,13 +1,14 @@
-#ifndef BRICKPLATFORM_H
-#define BRICKPLATFORM_H
+#ifndef STAIRBLOCK_H
+#define STAIRBLOCK_H
 
 #include <QGraphicsItem>
 #include <QPixmap>
 
-class BrickPlatform : public QGraphicsItem
+class StairBlock : public QGraphicsItem
 {
 public:
-    BrickPlatform( int length, QGraphicsItem *parent = 0);
+    //enum { Type = UserType + stairBlockType };
+    StairBlock ( int length, QGraphicsItem *parent = 0);
     void nextFrame();
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
@@ -19,4 +20,5 @@ private:
     int mLength;
     int mDirection;
 };
-#endif // PLATFORM_H
+
+#endif // STAIRBLOCK_H

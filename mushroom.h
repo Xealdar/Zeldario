@@ -3,7 +3,6 @@
 
 #include <QGraphicsItem>
 #include <QPixmap>
-#include "objecttype.h"
 #include <QTimer>
 #include <QObject>
 #include <typeinfo>
@@ -13,12 +12,13 @@ class Mushroom : public QObject, public QGraphicsItem
 {
 
 public:
-    enum { Type = UserType + mushroomType };
+    //enum { Type = UserType + mushroomType };
     Mushroom(QRectF platformRect, int direction,QGraphicsItem *parent = 0);
     virtual ~Mushroom();
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     int type() const;
+    //const int mushroomType = 18;
 
 public slots:
     void nextFrame();
@@ -36,5 +36,6 @@ private:
     bool right;
     bool down;
     bool right2;
+
 };
 #endif // MUSHROOM_H

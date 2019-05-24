@@ -30,6 +30,7 @@ SOURCES += \
     background.cpp \
     bonus.cpp \
     brickplatform.cpp \
+    castle.cpp \
     coin.cpp \
     coincounter.cpp \
     collision.cpp \
@@ -42,8 +43,9 @@ SOURCES += \
     mariocontroller.cpp \
     marioview2.cpp \
     mushroom.cpp \
-    platform.cpp \
     scene.cpp \
+    stairblock.cpp \
+    timer.cpp \
     view.cpp \
     zelda_monster.cpp
 
@@ -52,6 +54,7 @@ HEADERS += \
     background.h \
     bonus.h \
     brickplatform.h \
+    castle.h \
     coin.h \
     coincounter.h \
     collision.h \
@@ -63,9 +66,9 @@ HEADERS += \
     mariocontroller.h \
     marioview2.h \
     mushroom.h \
-    objecttype.h \
-    platform.h \
     scene.h \
+    stairblock.h \
+    timer.h \
     view.h \
     zelda_monster.h
 
@@ -82,3 +85,11 @@ RESOURCES += \
     Images/marioWalk.png \
     Images/marioStop.png \
     res.qrc
+
+DISTFILES += \
+    Font/CoinCount2.ttf \
+    Images/brick3.png \
+    Images/castle.png \
+    Images/coin.png \
+    Images/count.png \
+    Images/stairblock.png
