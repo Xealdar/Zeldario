@@ -1,12 +1,14 @@
 #include "mariocontroller.h"
 #include "marioview2.h"
-#include<QDebug>
+#include <QDebug>
+#include <QTimer>
 
 MarioController::MarioController(MarioView2 *view)
 {
     this->view = view;
     qDebug() << view;
 }
+
 
 void MarioController:: move(){
 
@@ -24,7 +26,8 @@ void MarioController:: move(){
         break;
 
         case JUMPING:
-            dy = -velocity*3;
+            dy = -velocity;
+
         break;
     }
 

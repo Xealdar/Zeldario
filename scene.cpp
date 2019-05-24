@@ -5,25 +5,22 @@
 #include <QTimer>
 #include <QPainter>
 #include <QMediaPlayer>
-
+#include "clientthread.h"
 
 #include"marioview2.h"
 #include"mariocontroller.h"
 
 Scene::Scene(QObject *parent) : QGraphicsScene(0,0,8000,720, parent)
-
-
 {
     Scene::initWorld();
-
     //controller = new Controller(mario);
+
 }
 
 
 
 void Scene::initWorld()
 {
-
 
     sky = new Background(QPixmap(":Images/sky.png"),0,0,0);
     //sky->setZValue(1);
@@ -39,12 +36,18 @@ void Scene::initWorld()
 
 
     mario = new MarioView2(QPixmap(":Images/marioWalk.png"), 150, groundYPosition - 65);
-    MarioView2 *mario2 = new MarioView2(QPixmap(":Images/marioWalk.png"), 0, groundYPosition + 650);
+    MarioView2 *mario2 = new MarioView2(QPixmap(":Images/marioWalk.png"), 0, groundYPosition + 600);
 
-    //addItem(mario2);
+    addItem(mario2);
     addItem(mario);
+
+    listenToServer();
 }
 
+void Scene::listenToServer(){
+    ClientThread *thread = new ClientThread(mario->getController());
+    thread->start();
+}
 
 void Scene::keyPressEvent(QKeyEvent *event)
 {

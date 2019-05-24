@@ -5,7 +5,8 @@
 #-------------------------------------------------
 
 QT       += core gui \
-         multimedia
+         multimedia  \
+         network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -30,6 +31,8 @@ SOURCES += \
     background.cpp \
     bonus.cpp \
     brickplatform.cpp \
+    client.cpp \
+    clientthread.cpp \
     coin.cpp \
     coincounter.cpp \
     collision.cpp \
@@ -52,6 +55,8 @@ HEADERS += \
     background.h \
     bonus.h \
     brickplatform.h \
+    client.h \
+    clientthread.h \
     coin.h \
     coincounter.h \
     collision.h \

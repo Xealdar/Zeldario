@@ -26,12 +26,13 @@ QRectF MarioView2::boundingRect() const
 
 QPainterPath MarioView2::shape() const
 {
-    return QPainterPath();
+    QPainterPath path;
+    path.addRect(0,0,35,73);
+    return path;
 }
 
 void MarioView2::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-
     count++;
 
     painter->drawPixmap(0,0, pixmap(), pixmapIndex, 0,60, 73);

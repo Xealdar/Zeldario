@@ -7,16 +7,10 @@ class MarioView2;
 
 class MarioController
 {
+
 public:
     MarioController(MarioView2 *view);
 
-    void keyPressEvent(QKeyEvent *event);
-    void keyReleaseEvent(QKeyEvent *event);
-
-    inline double getDx(){return dx;}
-    inline double getDy(){return dy;}
-
-    inline int getPixmapIndex(){return pixmapIndex;}
 
     enum State
     {
@@ -29,6 +23,20 @@ public:
         JUMPANDWALK,
         FALLANDWALK,
     };
+
+
+    void keyPressEvent(QKeyEvent *event);
+    void keyReleaseEvent(QKeyEvent *event);
+
+    inline double getDx(){return dx;}
+    inline double getDy(){return dy;}
+
+    inline double getVelocity(){return velocity;}
+
+    inline int getPixmapIndex(){return pixmapIndex;}
+
+    inline State getState(){return state;}
+
 
 private:
     MarioView2 *view;

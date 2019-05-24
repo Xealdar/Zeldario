@@ -42,6 +42,7 @@ private:
     QTimer *timer;
 
 
+    void listenToServer();
 };
 
 
