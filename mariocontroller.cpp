@@ -25,6 +25,11 @@ void MarioController:: move(){
             view->pauseMJ();
         break;
 
+        case FALLING:
+            dy = velocity;
+
+        break;
+
         case JUMPING:
             dy = -velocity;
 
@@ -58,6 +63,10 @@ void MarioController::keyPressEvent(QKeyEvent *event)
         break;
         case Qt::Key_Left:
             state = WALKING_LEFT;
+            move();
+        break;
+        case Qt::Key_Down:
+            state = FALLING;
             move();
         break;
         case Qt::Key_Space:
