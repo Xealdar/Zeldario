@@ -23,15 +23,17 @@ void View::resizeEvent(QResizeEvent *event)
 
         //qDebug()<<"view : "<<this->size().width()<<this->size().height()<<" scene : "<<scene()->width()<<scene()->height();
 
-        //dynamic_cast<Background*>(itemsList[0])->setPixmapSize(10,10);
-        //dynamic_cast<Background*>(itemsList[1])->setPixmapSize(10,100);
-        //dynamic_cast<Mario*>(itemsList[2])->setPixmapSize(this->size().width(),this->size().height());
+
 
 
         qDebug() << "resize" << itemsList;
 
-        dynamic_cast<Background*>(itemsList[2])->setPixmapSize(this->size().width(),100);
-        dynamic_cast<Background*>(itemsList[3])->setPixmapSize(this->size().width(),this->size().height());
+
+
+        dynamic_cast<Ground*>(itemsList[itemsList.length()-2])->setPixmapSize(this->size().width(),100);
+        dynamic_cast<Background*>(itemsList[itemsList.length()-1])->setPixmapSize(this->size().width(),this->size().height());
+
+
 
     }
 

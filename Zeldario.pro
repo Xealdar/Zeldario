@@ -37,13 +37,15 @@ SOURCES += \
     coincounter.cpp \
     collision.cpp \
     controller.cpp \
+    ground.cpp \
     link.cpp \
     main.cpp \
     mainwindow.cpp \
     mario.cpp \
-    mario_monster.cpp \
     mariocontroller.cpp \
     marioview2.cpp \
+    monstercontroller.cpp \
+    monsterview.cpp \
     mushroom.cpp \
     platform.cpp \
     scene.cpp \
@@ -61,12 +63,14 @@ HEADERS += \
     coincounter.h \
     collision.h \
     controller.h \
+    ground.h \
     link.h \
     mainwindow.h \
     mario.h \
-    mario_monster.h \
     mariocontroller.h \
     marioview2.h \
+    monstercontroller.h \
+    monsterview.h \
     mushroom.h \
     platform.h \
     scene.h \
@@ -85,4 +89,6 @@ RESOURCES += \
     Images/ground2.png \
     Images/marioWalk.png \
     Images/marioStop.png \
+    Images/MonsterDeath.png \
+    Images/MonsterIdle.png \
     res.qrc

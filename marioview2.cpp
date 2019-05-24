@@ -17,6 +17,7 @@ MarioView2::MarioView2(QPixmap pixmap, int originX, int originY)
     initMediaPlayer();
 
     qDebug() << "mario view init done" << pos().x() << pos().y();
+    qDebug()<<"test"<<scenePos();
 }
 
 QRectF MarioView2::boundingRect() const
@@ -27,7 +28,9 @@ QRectF MarioView2::boundingRect() const
 QPainterPath MarioView2::shape() const
 {
     QPainterPath path;
+
     path.addRect(0,0,35,73);
+
     return path;
 }
 
@@ -39,17 +42,17 @@ void MarioView2::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
     this->setTransformOriginPoint(boundingRect().center());
 
 
-    QList<QGraphicsItem*> itemsCollidingList = scene()->collidingItems(this);
+    /*QList<QGraphicsItem*> itemsCollidingList = scene()->collidingItems(this);
     if(itemsCollidingList.size() > 0){
         qDebug() << itemsCollidingList;
-    }
+    }*/
 
     double dx = controller->getDx();
     double dy = controller->getDy();
 
     if(dx != 0 || dy != 0){
         moveBy(dx, dy);
-        if(count % 8 == 0)
+        if(count % 30 == 0)
             updatePixmapIndex();
     } else
         count = 0;
