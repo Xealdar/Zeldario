@@ -38,9 +38,9 @@ public:
 
     inline State getState(){return state;}
 
-    QList<double> setRandomDxTab(QList<double> dxTab);
 
-    inline double getBouncingVelocity(){return bouncingVelocity;}
+
+
 
 
 private:
@@ -51,7 +51,7 @@ private:
     double originDx = 0;
     double originDy = 0;
     double velocity = 0.0005;
-    double bouncingVelocity = 0.0005;
+
 
     int pixmapIndex = 0;
 

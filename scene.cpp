@@ -86,8 +86,6 @@ void Scene::monsterSpawn()
 {
     monster.append(new MonsterView(QPixmap(":Images/MonsterIdle.png")));
     monster.at(monster.length()-1)->getController()->setMarioPos(mario->pos().x(),mario->pos().y());
-
-
     addItem(monster[monster.length()-1]);
 }
 

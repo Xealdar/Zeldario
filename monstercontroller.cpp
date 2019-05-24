@@ -17,14 +17,12 @@ MonsterController::MonsterController(MonsterView *view)
 }
 
 
-
-
-
 void MonsterController::createRandomSpawn()
 {
     originPosX = QRandomGenerator::global()->bounded(750);
     originPosY = QRandomGenerator::global()->bounded(10);
 }
+
 
 void MonsterController::IA()
 {
@@ -49,18 +47,11 @@ void MonsterController::collisionReaction(QVector<QGraphicsItem*> itemsColliding
     if(itemsCollidingVector.contains(dynamic_cast<Scene*>(view->scene())->getGround()))
     {
         state = BOUNCING;
+    }
 
+    if(itemsCollidingVector.contains(dynamic_cast<Scene*>(view->scene())->getMario()))
+    {
+        qDebug()<<"YOU DIE";
+        //Gérer la mort de mario
     }
 }
-
-QList<double> MonsterController::setRandomDxTab(QList<double> dxTab)
-{
-    for(int i=0;i<1000;i++)
-        //dxTab.append(QRandomGenerator::global()->bounded(100)* bouncingVelocity);
-        dxTab.append(i);
-    return dxTab;
-}
-
-
-
-

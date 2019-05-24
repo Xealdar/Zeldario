@@ -15,7 +15,7 @@
 
 #include <QVector>
 
-#include <controller.h>
+
 
 
 
@@ -31,6 +31,8 @@ public:
     void keyReleaseEvent(QKeyEvent *event);
 
     inline Ground *getGround(){return ground;}
+    inline MarioView2 *getMario(){return mario;}
+
 
 
 
@@ -51,7 +53,7 @@ private:
     MarioView2 *mario;
 
     QVector<MonsterView*> monster;
-    Controller *controller;
+
 
     QTimer *timer;
 
